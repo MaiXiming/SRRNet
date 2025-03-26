@@ -4,6 +4,7 @@
 **/*[dD]iscard*/
 **/*.pickle
 **/*.pkl
+**/*.mat
 **/*.svg
 **/*.png
 **/*.jpg
