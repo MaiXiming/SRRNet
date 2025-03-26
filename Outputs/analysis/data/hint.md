@@ -1,1 +1,2 @@
 - details-norm0: pickle files recording SSVEP templates, with --is-normalize 0
+- harmonic_visualize: un-comment visualization code in CVRegression.

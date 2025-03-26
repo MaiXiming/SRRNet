@@ -3,6 +3,7 @@
 **/*[tT]mp*/
 **/*[dD]iscard*/
 **/*.pickle
+**/*.pkl
 **/*.svg
 **/*.png
 **/*.jpg
