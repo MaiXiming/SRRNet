@@ -1,0 +1,8 @@
+**/*.pyc
+**/*.pth
+**/*[tT]mp*/
+**/*[dD]iscard*/
+**/*.pickle
+**/*.svg
+**/*.png
+**/*.jpg

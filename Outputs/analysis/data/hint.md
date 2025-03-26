@@ -1,0 +1,1 @@
+- details-norm0: pickle files recording SSVEP templates, with --is-normalize 0
