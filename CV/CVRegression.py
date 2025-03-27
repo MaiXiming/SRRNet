@@ -3,6 +3,7 @@ import pickle
 from torch.utils.data import DataLoader, TensorDataset
 
 from CV.CrossValidation import *
+from utils import *
 # from plots import *
 
 class CVRegression(CrossValidation):
@@ -75,52 +76,40 @@ class CVRegression(CrossValidation):
         self.args.fbii, self.args.blkii = fbii, block_test
         ## Prepare training set
         reg_trainset, reg_validset, unseenset, testblocks, seenset = self.separate_data_and_normalize(eeg_1subj, sc_template, block_test) # seen=train+valid
-        pretrainset = self.extract_seen_pretrain_allblocks(eeg_subjs_pretrain, sc_template) if self.args.is_pretrain==1 else None
+        # pretrainset = self.extract_seen_pretrain_allblocks(eeg_subjs_pretrain, sc_template) if self.args.is_pretrain==1 else None
 
-        ## Regress templates using DL model
-        model, best_dict = self.setup_and_train_reg(reg_trainset, reg_validset, pretrainset=None)
-        corr_unseen, loss_unseen = 0, 0 ## evaluate_model_on_unseen(model, unseenset, self.args, loss='mseloss')
         
-        ssvep_templates_combine, ssvep_templates_regress = self.get_ssvep_template_meanseen_regunseen(reg_trainset, reg_validset, model, sc_template[0,:,:,:]) # cls subspace tp
         
+        templates_filtered, weights_sf_seen, best_dict = self.get_spatialfilter_templates(reg_trainset, reg_validset, sc_template)
 
+        # ## Regress templates using DL model
+        # model, best_dict = self.get_regress_model(reg_trainset, reg_validset, pretrainset=None)
+        # corr_unseen, loss_unseen = 0, 0 ## evaluate_model_on_unseen(model, unseenset, self.args, loss='mseloss')
+        
+        # ssvep_templates_combine, ssvep_templates_regress = self.regress_filter_templates(reg_trainset, reg_validset, model, sc_template[0,:,:,:]) # cls subspace tp
 
-        ## Save templates
-        # true_unseen_templates = np.mean(unseenset['data'][:,0,:,:,:], 0) # unseen*chnl*tp
-        # recon_unseen_templates = ssvep_templates_combine[unseenset['label']]
-        # file = open(self.args.fn_detail, 'rb')
-        # data = pickle.load(file)
-        # data['true_templates'][:, fbii, :, :] = true_unseen_templates
-        # data['recon_templates'][:, fbii, :, :] = recon_unseen_templates
-        # file.close()
+        # if self.args.model == 'srrnet':
+        #     update_template_in_detail(self.args, seenset, unseenset, ssvep_templates_regress, fbii)
 
-        # file = open(self.args.fn_detail, 'wb')
-        # pickle.dump(data, file)
-        # file.close()
-        if self.args.model == 'srrnet':
-            update_template_in_detail(self.args, seenset, unseenset, ssvep_templates_regress, fbii)
-
-
-
-        ## Spatial filters
-        data_seen = np.concatenate((reg_trainset['data'][:,0,:,:,:], reg_validset['data'][:,0,:,:,:]), axis=1) # along class dim --> (block,class,chnl,tp)
-        weights_sf_seen = self.calculate_spatialfilters(data_seen, model=self.args.spatialfilter)
+        # ## Spatial filters
+        # data_seen = np.concatenate((reg_trainset['data'][:,0,:,:,:], reg_validset['data'][:,0,:,:,:]), axis=1) # along class dim --> (block,class,chnl,tp)
+        # weights_sf_seen = self.calculate_spatialfilters(data_seen, model=self.args.spatialfilter)
         
         ## Predict
         data_test = np.squeeze(testblocks['data']) # class chnl tp
-        predicts, rhos = self.decode_testdata(data_test, ssvep_templates_combine, weights_sf_seen)
+        predicts, rhos = self.decode_testdata(data_test, templates_filtered, weights_sf_seen)
         
         acc = np.mean(predicts==np.array(testblocks['label']))
         print(f'Subject={self.args.subject}, block_test={block_test}, fbii={fbii}, Acc={acc:.4f}')
 
-        metrics = {'loss_train': best_dict['loss_train'], 'loss_valid': best_dict['loss_valid'], 'loss_unseen': loss_unseen,
-                   'corr_train': best_dict['corr_train'], 'corr_valid': best_dict['corr_valid'], 'corr_unseen': corr_unseen,
+        metrics = {'loss_train': best_dict['loss_train'], 'loss_valid': best_dict['loss_valid'], 'loss_unseen': 0,
+                   'corr_train': best_dict['corr_train'], 'corr_valid': best_dict['corr_valid'], 'corr_unseen': 0,
                    'acc': acc, 'predicts': predicts}
         
 
         ## For Offline Analysis
-        if self.args.is_plot_template == 1:
-            explore_template(ssvep_templates_regress, reg_trainset, reg_validset, unseenset, self.args)
+        # if self.args.is_plot_template == 1:
+        #     explore_template(ssvep_templates_regress, reg_trainset, reg_validset, unseenset, self.args)
 
         if self.args.is_plot_weights == 1:
             plot_weights(best_dict, self.args)
@@ -135,13 +124,33 @@ class CVRegression(CrossValidation):
         
         return metrics, rhos
     
+
+    def get_spatialfilter_templates(self, reg_trainset, reg_validset, sc_template):
+        ## Spatial filters
+        data_seen = np.concatenate((reg_trainset['data'][:,0,:,:,:], reg_validset['data'][:,0,:,:,:]), axis=1) # along class dim --> (block,class,chnl,tp)
+        weights_sf_seen = self.calculate_spatialfilters(data_seen, model=self.args.spatialfilter)
+
+        ## Regress templates using DL model
+        model, best_dict = self.get_regress_model(reg_trainset, reg_validset, weights_sf_seen, pretrainset=None)
+        # corr_unseen, loss_unseen = 0, 0 ## evaluate_model_on_unseen(model, unseenset, self.args, loss='mseloss')
+        
+        ssvep_templates_combine_filtered, ssvep_templates_regress_filtered = self.regress_filter_templates(reg_trainset, reg_validset, model, sc_template[0,:,:,:], weights_sf_seen) # cls subspace tp
+
+        ## bug: how to feed unseenset?
+        # if self.args.model == 'srrnet':
+        #     update_template_in_detail(self.args, seenset, unseenset, ssvep_templates_regress, fbii)
+
+        # ssvep_templates_filtered = np.matmul(weights_sf_seen, ssvep_templates_combine)
+
+        return ssvep_templates_combine_filtered, weights_sf_seen, best_dict
+    
     
     def decode_testdata(self, data_test, ssvep_templates, weights_sf_seen):
         """
         Predict labels for test trials
         Inputs:
             data_test - ndarray (samples/Nclass, chnl, tp)
-            ssvep_templates - ndarray (Nclass, chnl, tp)
+            ssvep_templates (filtered) - ndarray (Nclass, subspace, tp)
             weights_sf_seen - ndarray (subspace/Nseen, chnl)
 
         Returns:
@@ -166,9 +175,9 @@ class CVRegression(CrossValidation):
         if self.args.spatialfilter != 'ecca':
             ## Apply spatial filters
             data_test = np.matmul(weights_sf_seen, data_test)
-            ssvep_templates = np.matmul(weights_sf_seen, ssvep_templates)
+            # ssvep_templates = np.matmul(weights_sf_seen, ssvep_templates)
         else:
-            ## eCCA: Directly decode without filters
+            ## eCCA: Directly decode without filters (bug: templates are filtered spatially already)
             ecca = ECCA(ssvep_templates, int(self.args.window*self.args.sampling_rate), self.args.harmonic_num, self.args.frequencies, self.args.phases, self.args.sampling_rate)
 
         sample_num = data_test.shape[0]
@@ -208,25 +217,33 @@ class CVRegression(CrossValidation):
         return predict, rho_vec
 
 
-    def get_ssvep_template_meanseen_regunseen(self, trainset, validset, model, sc_template_s0):
+    def regress_filter_templates(self, trainset, validset, model, sc_template_s0, weights_sf_seen):
         ## Regress ssvep template for unseen classes using model&sc_template, mean() ssvep template for seen classes using trainset&validset
-        ssvep_template_regress = self.regress_ssvep_template(model, sc_template_s0)
+        template_regress = self.regress_ssvep_template(model, sc_template_s0)
+
+        if self.args.model == 'srrnet': # srrv2: regressed output filtered already
+            template_regress = np.matmul(weights_sf_seen, template_regress)
+
+        ## shape: subspace_num, timepoint_num
+
         ## Integrate mean & regressed templates into final ssvep templates
-        ssvep_templates_output = np.zeros_like(ssvep_template_regress)
-        ssvep_templates_output[:] = ssvep_template_regress[:]
+        ssvep_templates_output = np.zeros_like(template_regress)
+        ssvep_templates_output[:] = template_regress[:]
+
         if self.args.is_tmpl_trueseen == 1:
             ## Don't use data_seen since order is wrong, ok for spatial filtering, not ok for templates
-            ssvep_templates_output[self.args.label_train,:,:] = np.mean(trainset['data'][:,0,:,:,:], axis=0)
-            ssvep_templates_output[self.args.label_valid,:,:] = np.mean(validset['data'][:,0,:,:,:], axis=0)
-        return ssvep_templates_output, ssvep_template_regress
+            ssvep_templates_output[self.args.label_train,:,:] = np.matmul(weights_sf_seen, np.mean(trainset['data'][:,0,:,:,:], axis=0))
+            ssvep_templates_output[self.args.label_valid,:,:] = np.matmul(weights_sf_seen, np.mean(validset['data'][:,0,:,:,:], axis=0))
+            
+        return ssvep_templates_output, template_regress
 
 
     def regress_ssvep_template(self, model, sc_template_s0):
         sc_template_s0 = torch.from_numpy(sc_template_s0.astype('float32')).float().to(self.args.device)
         sc_template_s0 = torch.unsqueeze(sc_template_s0, dim=1)
-        ssvep_template_regress = model(sc_template_s0)
-        ssvep_template_regress = ssvep_template_regress.detach().cpu().numpy() # !!! seen class also from regression
-        return ssvep_template_regress
+        template_regress = model(sc_template_s0)
+        template_regress = template_regress.detach().cpu().numpy() # !!! seen class also from regression
+        return template_regress
  
 
     def extract_seen_pretrain_allblocks(self, eeg_subjs, sc_template):
@@ -271,7 +288,7 @@ class CVRegression(CrossValidation):
         return trainset, validset, unseenset, testblocks, seenset
     
 
-    def setup_and_train_reg(self, trainset, validset, pretrainset):
+    def get_regress_model(self, trainset, validset, weights_sf_seen, pretrainset=None):
         """
         numpy2torch data and train model.
         Inputs:
@@ -282,20 +299,26 @@ class CVRegression(CrossValidation):
             best_dict: for recording loss&corr in training stage
             (side effect: save model parms in `./checkpoints`
         """
+        if self.args.model == 'srrv2':
+            weights = torch.from_numpy(weights_sf_seen).float().to(self.args.device)
+        else: # srrnet
+            weights = torch.eye(weights_sf_seen.shape[-1]).float().to(self.args.device)
+
         ## Prepare training set
-        train_loader, X_train, y_train, freqs_train = self.np2torch_reg(trainset)
-        _, X_valid, y_valid, freqs_valid = self.np2torch_reg(validset)
+        train_loader, X_train, y_train, freqs_train = self.prepare_np2torch(trainset, weights)
+        _, X_valid, y_valid, freqs_valid = self.prepare_np2torch(validset, weights)
         if pretrainset:
-            pretrain_loader, X_pretrain, y_pretrain, freqs_pretrain = self.np2torch_reg_pretrain(pretrainset)
+            pretrain_loader, X_pretrain, y_pretrain, freqs_pretrain = self.prepare_np2torch_pretrain(pretrainset, weights)
         
+        subspace_num = y_train.shape[-2] # Nseen if srrv2 else channel_num
         ## Select model, loss, opt
-        model = select_model(self.args, y_train.shape[-2])
+        model = select_model(self.args, subspace_num)
         model.apply(init_weights)
         criterion = get_criterion(self.args.loss)
         
         parms_model = model.parameters()
         optimizer = get_optimizer(parms_model, self.args, lr=self.args.lr)
-        best_dict = self.train_reg(model, optimizer, criterion, train_loader, X_train, y_train, freqs_train, X_valid, y_valid, freqs_valid)
+        best_dict = self.train_regression_model(model, optimizer, criterion, train_loader, X_train, y_train, freqs_train, X_valid, y_valid, freqs_valid)
 
         ## Save best model   
         torch.save(best_dict, self.args.save_path) # save once at the end of training is enough
@@ -303,7 +326,7 @@ class CVRegression(CrossValidation):
 
         # Load best model
         del model
-        model = select_model(self.args, y_train.shape[-2])
+        model = select_model(self.args, subspace_num)
         model.load_state_dict(best_dict['model_state_dict'])
         print(f"Load model state on epoch {best_dict['epoch']+1}")
 
@@ -311,7 +334,7 @@ class CVRegression(CrossValidation):
         # visualize_weight_harmonic(model, self.args)
         return model, best_dict
 
-    def train_reg(self, model, optimizer, criterion, train_loader, X_train, y_train, freqs_train, X_valid, y_valid, freqs_valid):
+    def train_regression_model(self, model, optimizer, criterion, train_loader, X_train, y_train, freqs_train, X_valid, y_valid, freqs_valid):
         ## Gradient descent for epochs
         print('Start training!')
         print("Model size: ", get_trainable_parameter_num(model))
@@ -409,7 +432,7 @@ class CVRegression(CrossValidation):
         return corr_mean, loss
 
 
-    def np2torch_reg_pretrain(self, pretrainset):
+    def prepare_np2torch_pretrain(self, pretrainset):
         ## pretrainset['data']: (N-1)*blocks, slide, Nseen, chnl, tp; ['sc_template']: slide, Nseen, chnl, tp
         ## not mean all subjects, but to mean for each subjs
         subjs_pretrain = self.args.subjects - 1
@@ -419,7 +442,7 @@ class CVRegression(CrossValidation):
                         'sc_template': pretrainset['sc_template'],
                         'label': pretrainset['label'],
             }
-            _, x, y, f = self.np2torch_reg(trainset, self.args) # slide*Nseen, samples > 1 subj train/valid
+            _, x, y, f = self.prepare_np2torch(trainset, self.args) # slide*Nseen, samples > 1 subj train/valid
             X_train.append(x)
             y_train.append(y)
             freqs.append(f)
@@ -435,7 +458,8 @@ class CVRegression(CrossValidation):
         return train_loader, X_train, y_train, freqs
 
 
-    def np2torch_reg(self, trainset):
+    def prepare_np2torch(self, trainset, weights):
+        ## weights: srrnet == eye matrix; srrv2 == TRCA filters
         ## Calculate mean template
         y_train = np.mean(trainset['data'], axis=0)
 
@@ -455,6 +479,9 @@ class CVRegression(CrossValidation):
         X_train = torch.unsqueeze(X_train, dim=1)
         y_train = torch.from_numpy(y_train.astype('float32')).float().to(self.args.device)
         freqs = torch.from_numpy(freqs.astype('float32')).float().to(self.args.device) # freqs, not label
+
+        ## Project
+        y_train = torch.matmul(weights, y_train)
 
         dataset_train = TensorDataset(X_train, y_train, freqs)
         train_loader = DataLoader(dataset_train, batch_size=self.args.batch_size, shuffle=True)

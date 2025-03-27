@@ -114,13 +114,13 @@ def set_args():
     parser.add_argument('--subject', type=int, default=31)
     parser.add_argument('--spatialfilter', type=str, default='trca') # trca; tdca
     parser.add_argument('--model', type=str, default='srrnet')
-    # srrnet, gzsl, igzsl, trca, tdca
+    # srrnet, gzsl, igzsl, trca, tdca, srrv2
     
     parser.add_argument('--step', type=float, default=25) # (0,1): second; [1,100]: win%
     parser.add_argument('--trad-trainblocks', type=int, default=5)
     parser.add_argument('--is-pretrain', type=int, default=0)
     parser.add_argument('--is-plot-template', type=int, default=1) # 1 in debug, 0 in nfolds
-    parser.add_argument('--is-losscurve', type=int, default=1) # 1 in debug, 0 in nfolds
+    parser.add_argument('--is-losscurve', type=int, default=0) # 1 in debug, 0 in nfolds
     parser.add_argument('--is-plot-weights', type=int, default=0) # 1 in debug, 0 in nfolds
     parser.add_argument('--is-csv-output', type=int, default=0) # 1 in debug, 0 in nfolds
     parser.add_argument('--is-cudnn-fixed', type=int, default=1) # gzsl == 0

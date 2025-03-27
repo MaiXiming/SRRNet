@@ -185,7 +185,7 @@ def select_model(args, subspace_num):
     ## Linear
     if args.model == 'lrchnl_c':
         model = LinearRegChnl(args.harmonic_x2, args.chnl_num).to(args.device)
-    elif args.model == 'srrnet':
+    elif args.model == 'srrnet' or args.model == 'srrv2':
         model = SRRNet(N2h=args.harmonic_x2, Nel=subspace_num, dp=args.dropout).to(args.device)
     elif args.model == 'rescnn':
         model = RegResCNN(N2h=args.harmonic_x2, Nel=subspace_num, dp=args.dropout).to(args.device)
@@ -292,3 +292,107 @@ def update_csv(csv_path, pkl_path, acc, losses, corrs, confusemat, args, timeout
                 
     except Timeout:
         print(f"CSV file occupied over {timeout} seconds (unnormal), please check the code.")
+
+
+
+def plot_weights(best_dict, args):
+    model = best_dict['model_state_dict']
+    conv_weights = model['cnn_expand.0.weight']
+    weights = torch.squeeze(conv_weights).cpu().numpy()
+    weights = np.transpose(weights)
+
+    # ## Normalize
+    # aa = 0
+    # weights = (weights - np.min(weights, aa)) / (np.max(weights, aa) - np.min(weights, aa))
+
+    plt.figure(figsize=(8,5))
+    # plt.imshow(np.transpose(weights))
+    plt.imshow(weights, cmap='Blues', aspect='auto', vmin=0, vmax=1) # Reds viridis norm='linear', 
+    plt.colorbar()  # 添加颜色条
+    plt.title('Convolution Kernel Weights Heatmap')
+    plt.xlabel('channels')
+    plt.ylabel('harmonics')
+    ensure_path('Tmp/fig_weight')
+    plt.savefig(f'Tmp/fig_weight/'+args.dataset+'-u'+str(args.unseen_num)+f'-s{args.subject}_b{args.blkii}_fb{args.fbii}'+'_weights.png')
+    a = 1
+
+
+def explore_template(reg_templates, trainset, validset, unseenset, args, chii=7):
+    # true_templates = np.zeros_like(reg_templates) # cls chnl tp
+    chnl_num, tp_num = trainset['data'][0,0,0,:,:].shape
+    true_templates = np.zeros((args.class_num, chnl_num, tp_num))
+    dataset = trainset
+    true_templates[dataset['label'],:,:] = np.mean(dataset['data'][:,0,:,:,:], 0)
+    dataset = validset
+    true_templates[dataset['label'],:,:] = np.mean(dataset['data'][:,0,:,:,:], 0)
+    dataset = unseenset
+    true_templates[dataset['label'],:,:] = np.mean(dataset['data'][:,0,:,:,:], 0)
+    
+    # true_templates = np.matmul(np.reshape(weights_sf_seen, (1, weights_sf_seen.shape[0], weights_sf_seen.shape[1])), true_templates)
+
+    ## Plot
+    fontsize = 5
+    plt.figure(figsize=(8,5))
+    t_start, duration = 100, 50
+    for fii in range(reg_templates.shape[0]):
+        freq = args.frequencies[fii]
+        reg = reg_templates[fii,chii,t_start:(t_start+duration)]
+        mean = true_templates[fii,chii,t_start:(t_start+duration)]
+        if fii in unseenset['label']:
+            label = 'unseen'
+        else:
+            label = 'seen'
+        ## Show
+        plt.subplot(5, 8, fii+1)
+        plt.plot(mean, 'k--', label='mean', linewidth=1)
+        plt.plot(reg, 'r', label='reg', linewidth=1)
+        # plt.title(f"{freq:.1f}Hz "+label, fontsize=fontsize)
+        # if fii == (reg_templates.shape[0] - 1):
+        #     plt.xticks(fontsize=fontsize)
+        #     plt.yticks(fontsize=fontsize)
+        # else:
+        #     plt.xticks([])
+        #     plt.yticks([])
+        plt.xticks([])
+        plt.yticks([])
+        # plt.legend(prop={'size': fontsize}) # 
+    ensure_path('Tmp/fig_tmpl')
+    plt.savefig(f'Tmp/fig_tmpl/'+args.dataset+'-u'+str(args.unseen_num)+f'-s{args.subject}_b{args.blkii}_fb{args.fbii}-tstart'+str(t_start)+'.png')
+    plt.savefig(f'Tmp/fig_tmpl/'+args.dataset+'-u'+str(args.unseen_num)+f'-s{args.subject}_b{args.blkii}_fb{args.fbii}-tstart'+str(t_start)+'.svg')
+    # plt.show()
+    a = 1
+
+
+def plot_training_curve(curves, epoch, epoch_num, args, suffix=''):
+    # curves = [losses_train, losses_valid, corrs_train, corrs_valid]
+    tmp = 'nfolds/' if args.nfolds==1 else ''
+    pth = 'Tmp/fig_loss/' + tmp
+    if not os.path.exists(pth):
+        os.mkdir(pth)
+    fn = os.path.join(pth, f'subj{args.subject}_b{args.blkii}_fb{args.fbii}'+suffix+'.png')
+    plot_and_save_curves(epoch+1, curves, epoch_num=epoch_num, filename=fn)
+
+
+def plot_and_save_curves(epochs, curves, epoch_num=200, filename="test.png"):
+    
+    colors = ['b', 'k', 'b', 'k', 'b', 'k', 'b', 'k', ]
+    lines = ['--', '--', '-', '-', '--', '--', '-', '-', ]
+    count = 0
+
+    plt.figure(figsize=(10, 6))
+    for key, value in curves.items():
+        label, curve = key, value
+        display = colors[count]+lines[count]
+        plt.plot(range(1, epochs + 1), curve, display, label=label)
+        plt.plot(range(1, epochs + 1), np.ones((epochs))*curve[-1], colors[count]+':', label=label+'_end')
+
+        count += 1
+
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    # plt.title('Training and Validation Loss')
+    plt.legend()
+    plt.xlim([0, epoch_num])
+
+    plt.savefig(filename)
+    plt.close()  # Close the plot to avoid memory issues
