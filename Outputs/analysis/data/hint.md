@@ -1,2 +1,3 @@
 - details-norm0: pickle files recording SSVEP templates, with --is-normalize 0
 - harmonic_visualize: un-comment visualization code in CVRegression.
+- accs_raw: from Outputs/Results/CSV, using .csv to save results. note that fbcca/trca same results across conditions, so rename manually.

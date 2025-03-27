@@ -1,0 +1,1065 @@
+dataset: benchmark 
+subjects: 35 
+unseen_num: 8 
+window: 1.0 
+subject: 0 
+spatialfilter: trca 
+model: trca 
+step: 25 
+trad_trainblocks: 5 
+is_pretrain: 0 
+is_plot_template: 1 
+is_losscurve: 1 
+is_plot_weights: 0 
+is_csv_output: 1 
+is_cudnn_fixed: 1 
+is_tsne_data: 0 
+fb_num: 5 
+harmonic_num: 5 
+lr: 0.001 
+batch_size: 64 
+epoch_num: 200 
+lr_pretrain: 0.001 
+batch_size_pretrain: 64 
+epoch_num_pretrain: 50 
+dropout: 0.5 
+loss: mse 
+is_earlystopping: 1 
+es_patience: 100 
+opt: adam 
+weight_decay: 1e-05 
+momentum: 0.1 
+is_filter: 1 
+is_detrend: 0 
+is_normalize: 1 
+is_phase_harmonic: 1 
+is_tmpl_trueseen: 1 
+save_path: ./Outputs/checkpoints/intra_subj0_20250326-172036/best-mdl.pth 
+timenow: 20250326-172036 
+server: default 
+subject_condition: intra 
+random_seed: 202403 
+nfolds: 0 
+device: cuda 
+load_path: ./Outputs/checkpoints/intra_subj0_20250326-172036/best-mdl.pth/best-mdl 
+subjects_pretrain: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34] 
+class_num: 40 
+block_num: 6 
+chnl_num: 9 
+timepoint_num: 250 
+input_shape: (1, 9, 250) 
+sampling_rate: 250 
+frequencies: [ 8.   9.  10.  11.  12.  13.  14.  15.   8.2  9.2 10.2 11.2 12.2 13.2
+ 14.2 15.2  8.4  9.4 10.4 11.4 12.4 13.4 14.4 15.4  8.6  9.6 10.6 11.6
+ 12.6 13.6 14.6 15.6  8.8  9.8 10.8 11.8 12.8 13.8 14.8 15.8] 
+phases: [0.         1.57079633 3.14159265 4.71238898 0.         1.57079633
+ 3.14159265 4.71238898 1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         3.14159265 4.71238898
+ 0.         1.57079633 3.14159265 4.71238898 0.         1.57079633
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 0.         1.57079633 3.14159265 4.71238898
+ 0.         1.57079633 3.14159265 4.71238898] 
+harmonic_x2: 10 
+labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+blocks: [0, 1, 2, 3, 4, 5] 
+label_unseen: [16, 17, 18, 19, 20, 21, 22, 23] 
+label_valid: [8, 9, 10, 11, 28, 29, 30, 31] 
+label_seen: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+label_train: [0, 1, 2, 3, 4, 5, 6, 7, 12, 13, 14, 15, 24, 25, 26, 27, 32, 33, 34, 35, 36, 37, 38, 39] 
+seen_num: 32 
+
+
+dataset: benchmark 
+subjects: 35 
+unseen_num: 8 
+window: 0.8 
+subject: 0 
+spatialfilter: trca 
+model: trca 
+step: 25 
+trad_trainblocks: 5 
+is_pretrain: 0 
+is_plot_template: 1 
+is_losscurve: 1 
+is_plot_weights: 0 
+is_csv_output: 1 
+is_cudnn_fixed: 1 
+is_tsne_data: 0 
+fb_num: 5 
+harmonic_num: 5 
+lr: 0.001 
+batch_size: 64 
+epoch_num: 200 
+lr_pretrain: 0.001 
+batch_size_pretrain: 64 
+epoch_num_pretrain: 50 
+dropout: 0.5 
+loss: mse 
+is_earlystopping: 1 
+es_patience: 100 
+opt: adam 
+weight_decay: 1e-05 
+momentum: 0.1 
+is_filter: 1 
+is_detrend: 0 
+is_normalize: 1 
+is_phase_harmonic: 1 
+is_tmpl_trueseen: 1 
+save_path: ./Outputs/checkpoints/intra_subj0_20250326-172036/best-mdl.pth 
+timenow: 20250326-172036 
+server: default 
+subject_condition: intra 
+random_seed: 202403 
+nfolds: 0 
+device: cuda 
+load_path: ./Outputs/checkpoints/intra_subj0_20250326-172036/best-mdl.pth/best-mdl 
+subjects_pretrain: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34] 
+class_num: 40 
+block_num: 6 
+chnl_num: 9 
+timepoint_num: 200 
+input_shape: (1, 9, 200) 
+sampling_rate: 250 
+frequencies: [ 8.   9.  10.  11.  12.  13.  14.  15.   8.2  9.2 10.2 11.2 12.2 13.2
+ 14.2 15.2  8.4  9.4 10.4 11.4 12.4 13.4 14.4 15.4  8.6  9.6 10.6 11.6
+ 12.6 13.6 14.6 15.6  8.8  9.8 10.8 11.8 12.8 13.8 14.8 15.8] 
+phases: [0.         1.57079633 3.14159265 4.71238898 0.         1.57079633
+ 3.14159265 4.71238898 1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         3.14159265 4.71238898
+ 0.         1.57079633 3.14159265 4.71238898 0.         1.57079633
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 0.         1.57079633 3.14159265 4.71238898
+ 0.         1.57079633 3.14159265 4.71238898] 
+harmonic_x2: 10 
+labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+blocks: [0, 1, 2, 3, 4, 5] 
+label_unseen: [16, 17, 18, 19, 20, 21, 22, 23] 
+label_valid: [8, 9, 10, 11, 28, 29, 30, 31] 
+label_seen: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+label_train: [0, 1, 2, 3, 4, 5, 6, 7, 12, 13, 14, 15, 24, 25, 26, 27, 32, 33, 34, 35, 36, 37, 38, 39] 
+seen_num: 32 
+
+
+dataset: benchmark 
+subjects: 35 
+unseen_num: 8 
+window: 0.6 
+subject: 0 
+spatialfilter: trca 
+model: trca 
+step: 25 
+trad_trainblocks: 5 
+is_pretrain: 0 
+is_plot_template: 1 
+is_losscurve: 1 
+is_plot_weights: 0 
+is_csv_output: 1 
+is_cudnn_fixed: 1 
+is_tsne_data: 0 
+fb_num: 5 
+harmonic_num: 5 
+lr: 0.001 
+batch_size: 64 
+epoch_num: 200 
+lr_pretrain: 0.001 
+batch_size_pretrain: 64 
+epoch_num_pretrain: 50 
+dropout: 0.5 
+loss: mse 
+is_earlystopping: 1 
+es_patience: 100 
+opt: adam 
+weight_decay: 1e-05 
+momentum: 0.1 
+is_filter: 1 
+is_detrend: 0 
+is_normalize: 1 
+is_phase_harmonic: 1 
+is_tmpl_trueseen: 1 
+save_path: ./Outputs/checkpoints/intra_subj0_20250326-172036/best-mdl.pth 
+timenow: 20250326-172036 
+server: default 
+subject_condition: intra 
+random_seed: 202403 
+nfolds: 0 
+device: cuda 
+load_path: ./Outputs/checkpoints/intra_subj0_20250326-172036/best-mdl.pth/best-mdl 
+subjects_pretrain: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34] 
+class_num: 40 
+block_num: 6 
+chnl_num: 9 
+timepoint_num: 150 
+input_shape: (1, 9, 150) 
+sampling_rate: 250 
+frequencies: [ 8.   9.  10.  11.  12.  13.  14.  15.   8.2  9.2 10.2 11.2 12.2 13.2
+ 14.2 15.2  8.4  9.4 10.4 11.4 12.4 13.4 14.4 15.4  8.6  9.6 10.6 11.6
+ 12.6 13.6 14.6 15.6  8.8  9.8 10.8 11.8 12.8 13.8 14.8 15.8] 
+phases: [0.         1.57079633 3.14159265 4.71238898 0.         1.57079633
+ 3.14159265 4.71238898 1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         3.14159265 4.71238898
+ 0.         1.57079633 3.14159265 4.71238898 0.         1.57079633
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 0.         1.57079633 3.14159265 4.71238898
+ 0.         1.57079633 3.14159265 4.71238898] 
+harmonic_x2: 10 
+labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+blocks: [0, 1, 2, 3, 4, 5] 
+label_unseen: [16, 17, 18, 19, 20, 21, 22, 23] 
+label_valid: [8, 9, 10, 11, 28, 29, 30, 31] 
+label_seen: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+label_train: [0, 1, 2, 3, 4, 5, 6, 7, 12, 13, 14, 15, 24, 25, 26, 27, 32, 33, 34, 35, 36, 37, 38, 39] 
+seen_num: 32 
+
+
+dataset: benchmark 
+subjects: 35 
+unseen_num: 8 
+window: 0.4 
+subject: 0 
+spatialfilter: trca 
+model: trca 
+step: 25 
+trad_trainblocks: 5 
+is_pretrain: 0 
+is_plot_template: 1 
+is_losscurve: 1 
+is_plot_weights: 0 
+is_csv_output: 1 
+is_cudnn_fixed: 1 
+is_tsne_data: 0 
+fb_num: 5 
+harmonic_num: 5 
+lr: 0.001 
+batch_size: 64 
+epoch_num: 200 
+lr_pretrain: 0.001 
+batch_size_pretrain: 64 
+epoch_num_pretrain: 50 
+dropout: 0.5 
+loss: mse 
+is_earlystopping: 1 
+es_patience: 100 
+opt: adam 
+weight_decay: 1e-05 
+momentum: 0.1 
+is_filter: 1 
+is_detrend: 0 
+is_normalize: 1 
+is_phase_harmonic: 1 
+is_tmpl_trueseen: 1 
+save_path: ./Outputs/checkpoints/intra_subj0_20250326-172036/best-mdl.pth 
+timenow: 20250326-172036 
+server: default 
+subject_condition: intra 
+random_seed: 202403 
+nfolds: 0 
+device: cuda 
+load_path: ./Outputs/checkpoints/intra_subj0_20250326-172036/best-mdl.pth/best-mdl 
+subjects_pretrain: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34] 
+class_num: 40 
+block_num: 6 
+chnl_num: 9 
+timepoint_num: 100 
+input_shape: (1, 9, 100) 
+sampling_rate: 250 
+frequencies: [ 8.   9.  10.  11.  12.  13.  14.  15.   8.2  9.2 10.2 11.2 12.2 13.2
+ 14.2 15.2  8.4  9.4 10.4 11.4 12.4 13.4 14.4 15.4  8.6  9.6 10.6 11.6
+ 12.6 13.6 14.6 15.6  8.8  9.8 10.8 11.8 12.8 13.8 14.8 15.8] 
+phases: [0.         1.57079633 3.14159265 4.71238898 0.         1.57079633
+ 3.14159265 4.71238898 1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         3.14159265 4.71238898
+ 0.         1.57079633 3.14159265 4.71238898 0.         1.57079633
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 0.         1.57079633 3.14159265 4.71238898
+ 0.         1.57079633 3.14159265 4.71238898] 
+harmonic_x2: 10 
+labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+blocks: [0, 1, 2, 3, 4, 5] 
+label_unseen: [16, 17, 18, 19, 20, 21, 22, 23] 
+label_valid: [8, 9, 10, 11, 28, 29, 30, 31] 
+label_seen: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+label_train: [0, 1, 2, 3, 4, 5, 6, 7, 12, 13, 14, 15, 24, 25, 26, 27, 32, 33, 34, 35, 36, 37, 38, 39] 
+seen_num: 32 
+
+
+dataset: benchmark 
+subjects: 35 
+unseen_num: 8 
+window: 1.2 
+subject: 0 
+spatialfilter: trca 
+model: trca 
+step: 25 
+trad_trainblocks: 5 
+is_pretrain: 0 
+is_plot_template: 1 
+is_losscurve: 1 
+is_plot_weights: 0 
+is_csv_output: 1 
+is_cudnn_fixed: 1 
+is_tsne_data: 0 
+fb_num: 5 
+harmonic_num: 5 
+lr: 0.001 
+batch_size: 64 
+epoch_num: 200 
+lr_pretrain: 0.001 
+batch_size_pretrain: 64 
+epoch_num_pretrain: 50 
+dropout: 0.5 
+loss: mse 
+is_earlystopping: 1 
+es_patience: 100 
+opt: adam 
+weight_decay: 1e-05 
+momentum: 0.1 
+is_filter: 1 
+is_detrend: 0 
+is_normalize: 1 
+is_phase_harmonic: 1 
+is_tmpl_trueseen: 1 
+save_path: ./Outputs/checkpoints/intra_subj0_20250326-172036/best-mdl.pth 
+timenow: 20250326-172036 
+server: default 
+subject_condition: intra 
+random_seed: 202403 
+nfolds: 0 
+device: cuda 
+load_path: ./Outputs/checkpoints/intra_subj0_20250326-172036/best-mdl.pth/best-mdl 
+subjects_pretrain: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34] 
+class_num: 40 
+block_num: 6 
+chnl_num: 9 
+timepoint_num: 300 
+input_shape: (1, 9, 300) 
+sampling_rate: 250 
+frequencies: [ 8.   9.  10.  11.  12.  13.  14.  15.   8.2  9.2 10.2 11.2 12.2 13.2
+ 14.2 15.2  8.4  9.4 10.4 11.4 12.4 13.4 14.4 15.4  8.6  9.6 10.6 11.6
+ 12.6 13.6 14.6 15.6  8.8  9.8 10.8 11.8 12.8 13.8 14.8 15.8] 
+phases: [0.         1.57079633 3.14159265 4.71238898 0.         1.57079633
+ 3.14159265 4.71238898 1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         3.14159265 4.71238898
+ 0.         1.57079633 3.14159265 4.71238898 0.         1.57079633
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 0.         1.57079633 3.14159265 4.71238898
+ 0.         1.57079633 3.14159265 4.71238898] 
+harmonic_x2: 10 
+labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+blocks: [0, 1, 2, 3, 4, 5] 
+label_unseen: [16, 17, 18, 19, 20, 21, 22, 23] 
+label_valid: [8, 9, 10, 11, 28, 29, 30, 31] 
+label_seen: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+label_train: [0, 1, 2, 3, 4, 5, 6, 7, 12, 13, 14, 15, 24, 25, 26, 27, 32, 33, 34, 35, 36, 37, 38, 39] 
+seen_num: 32 
+
+
+dataset: beta 
+subjects: 70 
+unseen_num: 8 
+window: 1.0 
+subject: 0 
+spatialfilter: trca 
+model: trca 
+step: 25 
+trad_trainblocks: 3 
+is_pretrain: 0 
+is_plot_template: 1 
+is_losscurve: 1 
+is_plot_weights: 0 
+is_csv_output: 1 
+is_cudnn_fixed: 1 
+is_tsne_data: 0 
+fb_num: 5 
+harmonic_num: 5 
+lr: 0.001 
+batch_size: 64 
+epoch_num: 200 
+lr_pretrain: 0.001 
+batch_size_pretrain: 64 
+epoch_num_pretrain: 50 
+dropout: 0.5 
+loss: mse 
+is_earlystopping: 1 
+es_patience: 100 
+opt: adam 
+weight_decay: 1e-05 
+momentum: 0.1 
+is_filter: 1 
+is_detrend: 0 
+is_normalize: 1 
+is_phase_harmonic: 1 
+is_tmpl_trueseen: 1 
+save_path: ./Outputs/checkpoints/intra_subj0_20250326-173049/best-mdl.pth 
+timenow: 20250326-173049 
+server: default 
+subject_condition: intra 
+random_seed: 202403 
+nfolds: 0 
+device: cuda 
+load_path: ./Outputs/checkpoints/intra_subj0_20250326-173049/best-mdl.pth/best-mdl 
+subjects_pretrain: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69] 
+class_num: 40 
+block_num: 4 
+chnl_num: 9 
+timepoint_num: 250 
+input_shape: (1, 9, 250) 
+sampling_rate: 250.0 
+frequencies: [ 8.6  8.8  9.   9.2  9.4  9.6  9.8 10.  10.2 10.4 10.6 10.8 11.  11.2
+ 11.4 11.6 11.8 12.  12.2 12.4 12.6 12.8 13.  13.2 13.4 13.6 13.8 14.
+ 14.2 14.4 14.6 14.8 15.  15.2 15.4 15.6 15.8  8.   8.2  8.4] 
+phases: [4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265] 
+harmonic_x2: 10 
+labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+blocks: [0, 1, 2, 3] 
+label_unseen: [39, 4, 9, 14, 19, 24, 29, 34] 
+label_valid: [38, 3, 8, 13, 20, 25, 30, 35] 
+label_seen: [37, 2, 7, 12, 17, 22, 27, 32, 38, 3, 8, 13, 18, 23, 28, 33, 0, 5, 10, 15, 20, 25, 30, 35, 1, 6, 11, 16, 21, 26, 31, 36] 
+label_train: [37, 2, 7, 12, 17, 22, 27, 32, 18, 23, 28, 33, 0, 5, 10, 15, 1, 6, 11, 16, 21, 26, 31, 36] 
+seen_num: 32 
+
+
+dataset: beta 
+subjects: 70 
+unseen_num: 8 
+window: 0.8 
+subject: 0 
+spatialfilter: trca 
+model: trca 
+step: 25 
+trad_trainblocks: 3 
+is_pretrain: 0 
+is_plot_template: 1 
+is_losscurve: 1 
+is_plot_weights: 0 
+is_csv_output: 1 
+is_cudnn_fixed: 1 
+is_tsne_data: 0 
+fb_num: 5 
+harmonic_num: 5 
+lr: 0.001 
+batch_size: 64 
+epoch_num: 200 
+lr_pretrain: 0.001 
+batch_size_pretrain: 64 
+epoch_num_pretrain: 50 
+dropout: 0.5 
+loss: mse 
+is_earlystopping: 1 
+es_patience: 100 
+opt: adam 
+weight_decay: 1e-05 
+momentum: 0.1 
+is_filter: 1 
+is_detrend: 0 
+is_normalize: 1 
+is_phase_harmonic: 1 
+is_tmpl_trueseen: 1 
+save_path: ./Outputs/checkpoints/intra_subj0_20250326-173049/best-mdl.pth 
+timenow: 20250326-173049 
+server: default 
+subject_condition: intra 
+random_seed: 202403 
+nfolds: 0 
+device: cuda 
+load_path: ./Outputs/checkpoints/intra_subj0_20250326-173049/best-mdl.pth/best-mdl 
+subjects_pretrain: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69] 
+class_num: 40 
+block_num: 4 
+chnl_num: 9 
+timepoint_num: 200 
+input_shape: (1, 9, 200) 
+sampling_rate: 250.0 
+frequencies: [ 8.6  8.8  9.   9.2  9.4  9.6  9.8 10.  10.2 10.4 10.6 10.8 11.  11.2
+ 11.4 11.6 11.8 12.  12.2 12.4 12.6 12.8 13.  13.2 13.4 13.6 13.8 14.
+ 14.2 14.4 14.6 14.8 15.  15.2 15.4 15.6 15.8  8.   8.2  8.4] 
+phases: [4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265] 
+harmonic_x2: 10 
+labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+blocks: [0, 1, 2, 3] 
+label_unseen: [39, 4, 9, 14, 19, 24, 29, 34] 
+label_valid: [38, 3, 8, 13, 20, 25, 30, 35] 
+label_seen: [37, 2, 7, 12, 17, 22, 27, 32, 38, 3, 8, 13, 18, 23, 28, 33, 0, 5, 10, 15, 20, 25, 30, 35, 1, 6, 11, 16, 21, 26, 31, 36] 
+label_train: [37, 2, 7, 12, 17, 22, 27, 32, 18, 23, 28, 33, 0, 5, 10, 15, 1, 6, 11, 16, 21, 26, 31, 36] 
+seen_num: 32 
+
+
+dataset: beta 
+subjects: 70 
+unseen_num: 8 
+window: 0.6 
+subject: 0 
+spatialfilter: trca 
+model: trca 
+step: 25 
+trad_trainblocks: 3 
+is_pretrain: 0 
+is_plot_template: 1 
+is_losscurve: 1 
+is_plot_weights: 0 
+is_csv_output: 1 
+is_cudnn_fixed: 1 
+is_tsne_data: 0 
+fb_num: 5 
+harmonic_num: 5 
+lr: 0.001 
+batch_size: 64 
+epoch_num: 200 
+lr_pretrain: 0.001 
+batch_size_pretrain: 64 
+epoch_num_pretrain: 50 
+dropout: 0.5 
+loss: mse 
+is_earlystopping: 1 
+es_patience: 100 
+opt: adam 
+weight_decay: 1e-05 
+momentum: 0.1 
+is_filter: 1 
+is_detrend: 0 
+is_normalize: 1 
+is_phase_harmonic: 1 
+is_tmpl_trueseen: 1 
+save_path: ./Outputs/checkpoints/intra_subj0_20250326-173049/best-mdl.pth 
+timenow: 20250326-173049 
+server: default 
+subject_condition: intra 
+random_seed: 202403 
+nfolds: 0 
+device: cuda 
+load_path: ./Outputs/checkpoints/intra_subj0_20250326-173049/best-mdl.pth/best-mdl 
+subjects_pretrain: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69] 
+class_num: 40 
+block_num: 4 
+chnl_num: 9 
+timepoint_num: 150 
+input_shape: (1, 9, 150) 
+sampling_rate: 250.0 
+frequencies: [ 8.6  8.8  9.   9.2  9.4  9.6  9.8 10.  10.2 10.4 10.6 10.8 11.  11.2
+ 11.4 11.6 11.8 12.  12.2 12.4 12.6 12.8 13.  13.2 13.4 13.6 13.8 14.
+ 14.2 14.4 14.6 14.8 15.  15.2 15.4 15.6 15.8  8.   8.2  8.4] 
+phases: [4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265] 
+harmonic_x2: 10 
+labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+blocks: [0, 1, 2, 3] 
+label_unseen: [39, 4, 9, 14, 19, 24, 29, 34] 
+label_valid: [38, 3, 8, 13, 20, 25, 30, 35] 
+label_seen: [37, 2, 7, 12, 17, 22, 27, 32, 38, 3, 8, 13, 18, 23, 28, 33, 0, 5, 10, 15, 20, 25, 30, 35, 1, 6, 11, 16, 21, 26, 31, 36] 
+label_train: [37, 2, 7, 12, 17, 22, 27, 32, 18, 23, 28, 33, 0, 5, 10, 15, 1, 6, 11, 16, 21, 26, 31, 36] 
+seen_num: 32 
+
+
+dataset: beta 
+subjects: 70 
+unseen_num: 8 
+window: 1.2 
+subject: 0 
+spatialfilter: trca 
+model: trca 
+step: 25 
+trad_trainblocks: 3 
+is_pretrain: 0 
+is_plot_template: 1 
+is_losscurve: 1 
+is_plot_weights: 0 
+is_csv_output: 1 
+is_cudnn_fixed: 1 
+is_tsne_data: 0 
+fb_num: 5 
+harmonic_num: 5 
+lr: 0.001 
+batch_size: 64 
+epoch_num: 200 
+lr_pretrain: 0.001 
+batch_size_pretrain: 64 
+epoch_num_pretrain: 50 
+dropout: 0.5 
+loss: mse 
+is_earlystopping: 1 
+es_patience: 100 
+opt: adam 
+weight_decay: 1e-05 
+momentum: 0.1 
+is_filter: 1 
+is_detrend: 0 
+is_normalize: 1 
+is_phase_harmonic: 1 
+is_tmpl_trueseen: 1 
+save_path: ./Outputs/checkpoints/intra_subj0_20250326-173049/best-mdl.pth 
+timenow: 20250326-173049 
+server: default 
+subject_condition: intra 
+random_seed: 202403 
+nfolds: 0 
+device: cuda 
+load_path: ./Outputs/checkpoints/intra_subj0_20250326-173049/best-mdl.pth/best-mdl 
+subjects_pretrain: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69] 
+class_num: 40 
+block_num: 4 
+chnl_num: 9 
+timepoint_num: 300 
+input_shape: (1, 9, 300) 
+sampling_rate: 250.0 
+frequencies: [ 8.6  8.8  9.   9.2  9.4  9.6  9.8 10.  10.2 10.4 10.6 10.8 11.  11.2
+ 11.4 11.6 11.8 12.  12.2 12.4 12.6 12.8 13.  13.2 13.4 13.6 13.8 14.
+ 14.2 14.4 14.6 14.8 15.  15.2 15.4 15.6 15.8  8.   8.2  8.4] 
+phases: [4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265] 
+harmonic_x2: 10 
+labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+blocks: [0, 1, 2, 3] 
+label_unseen: [39, 4, 9, 14, 19, 24, 29, 34] 
+label_valid: [38, 3, 8, 13, 20, 25, 30, 35] 
+label_seen: [37, 2, 7, 12, 17, 22, 27, 32, 38, 3, 8, 13, 18, 23, 28, 33, 0, 5, 10, 15, 20, 25, 30, 35, 1, 6, 11, 16, 21, 26, 31, 36] 
+label_train: [37, 2, 7, 12, 17, 22, 27, 32, 18, 23, 28, 33, 0, 5, 10, 15, 1, 6, 11, 16, 21, 26, 31, 36] 
+seen_num: 32 
+
+
+dataset: beta 
+subjects: 70 
+unseen_num: 8 
+window: 0.4 
+subject: 0 
+spatialfilter: trca 
+model: trca 
+step: 25 
+trad_trainblocks: 3 
+is_pretrain: 0 
+is_plot_template: 1 
+is_losscurve: 1 
+is_plot_weights: 0 
+is_csv_output: 1 
+is_cudnn_fixed: 1 
+is_tsne_data: 0 
+fb_num: 5 
+harmonic_num: 5 
+lr: 0.001 
+batch_size: 64 
+epoch_num: 200 
+lr_pretrain: 0.001 
+batch_size_pretrain: 64 
+epoch_num_pretrain: 50 
+dropout: 0.5 
+loss: mse 
+is_earlystopping: 1 
+es_patience: 100 
+opt: adam 
+weight_decay: 1e-05 
+momentum: 0.1 
+is_filter: 1 
+is_detrend: 0 
+is_normalize: 1 
+is_phase_harmonic: 1 
+is_tmpl_trueseen: 1 
+save_path: ./Outputs/checkpoints/intra_subj0_20250326-173049/best-mdl.pth 
+timenow: 20250326-173049 
+server: default 
+subject_condition: intra 
+random_seed: 202403 
+nfolds: 0 
+device: cuda 
+load_path: ./Outputs/checkpoints/intra_subj0_20250326-173049/best-mdl.pth/best-mdl 
+subjects_pretrain: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69] 
+class_num: 40 
+block_num: 4 
+chnl_num: 9 
+timepoint_num: 100 
+input_shape: (1, 9, 100) 
+sampling_rate: 250.0 
+frequencies: [ 8.6  8.8  9.   9.2  9.4  9.6  9.8 10.  10.2 10.4 10.6 10.8 11.  11.2
+ 11.4 11.6 11.8 12.  12.2 12.4 12.6 12.8 13.  13.2 13.4 13.6 13.8 14.
+ 14.2 14.4 14.6 14.8 15.  15.2 15.4 15.6 15.8  8.   8.2  8.4] 
+phases: [4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265] 
+harmonic_x2: 10 
+labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+blocks: [0, 1, 2, 3] 
+label_unseen: [39, 4, 9, 14, 19, 24, 29, 34] 
+label_valid: [38, 3, 8, 13, 20, 25, 30, 35] 
+label_seen: [37, 2, 7, 12, 17, 22, 27, 32, 38, 3, 8, 13, 18, 23, 28, 33, 0, 5, 10, 15, 20, 25, 30, 35, 1, 6, 11, 16, 21, 26, 31, 36] 
+label_train: [37, 2, 7, 12, 17, 22, 27, 32, 18, 23, 28, 33, 0, 5, 10, 15, 1, 6, 11, 16, 21, 26, 31, 36] 
+seen_num: 32 
+
+
+dataset: beta 
+subjects: 70 
+unseen_num: 8 
+window: 1.0 
+subject: 0 
+spatialfilter: trca 
+model: trca 
+step: 25 
+trad_trainblocks: 3 
+is_pretrain: 0 
+is_plot_template: 1 
+is_losscurve: 1 
+is_plot_weights: 0 
+is_csv_output: 1 
+is_cudnn_fixed: 1 
+is_tsne_data: 0 
+fb_num: 5 
+harmonic_num: 5 
+lr: 0.001 
+batch_size: 64 
+epoch_num: 200 
+lr_pretrain: 0.001 
+batch_size_pretrain: 64 
+epoch_num_pretrain: 50 
+dropout: 0.5 
+loss: mse 
+is_earlystopping: 1 
+es_patience: 100 
+opt: adam 
+weight_decay: 1e-05 
+momentum: 0.1 
+is_filter: 1 
+is_detrend: 0 
+is_normalize: 1 
+is_phase_harmonic: 1 
+is_tmpl_trueseen: 1 
+save_path: ./Outputs/checkpoints/intra_subj0_20250326-173133/best-mdl.pth 
+timenow: 20250326-173133 
+server: default 
+subject_condition: intra 
+random_seed: 202403 
+nfolds: 0 
+device: cuda 
+load_path: ./Outputs/checkpoints/intra_subj0_20250326-173133/best-mdl.pth/best-mdl 
+subjects_pretrain: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69] 
+class_num: 40 
+block_num: 4 
+chnl_num: 9 
+timepoint_num: 250 
+input_shape: (1, 9, 250) 
+sampling_rate: 250.0 
+frequencies: [ 8.6  8.8  9.   9.2  9.4  9.6  9.8 10.  10.2 10.4 10.6 10.8 11.  11.2
+ 11.4 11.6 11.8 12.  12.2 12.4 12.6 12.8 13.  13.2 13.4 13.6 13.8 14.
+ 14.2 14.4 14.6 14.8 15.  15.2 15.4 15.6 15.8  8.   8.2  8.4] 
+phases: [4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265] 
+harmonic_x2: 10 
+labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+blocks: [0, 1, 2, 3] 
+label_unseen: [39, 4, 9, 14, 19, 24, 29, 34] 
+label_valid: [38, 3, 8, 13, 20, 25, 30, 35] 
+label_seen: [37, 2, 7, 12, 17, 22, 27, 32, 38, 3, 8, 13, 18, 23, 28, 33, 0, 5, 10, 15, 20, 25, 30, 35, 1, 6, 11, 16, 21, 26, 31, 36] 
+label_train: [37, 2, 7, 12, 17, 22, 27, 32, 18, 23, 28, 33, 0, 5, 10, 15, 1, 6, 11, 16, 21, 26, 31, 36] 
+seen_num: 32 
+
+
+dataset: beta 
+subjects: 70 
+unseen_num: 8 
+window: 0.8 
+subject: 0 
+spatialfilter: trca 
+model: trca 
+step: 25 
+trad_trainblocks: 3 
+is_pretrain: 0 
+is_plot_template: 1 
+is_losscurve: 1 
+is_plot_weights: 0 
+is_csv_output: 1 
+is_cudnn_fixed: 1 
+is_tsne_data: 0 
+fb_num: 5 
+harmonic_num: 5 
+lr: 0.001 
+batch_size: 64 
+epoch_num: 200 
+lr_pretrain: 0.001 
+batch_size_pretrain: 64 
+epoch_num_pretrain: 50 
+dropout: 0.5 
+loss: mse 
+is_earlystopping: 1 
+es_patience: 100 
+opt: adam 
+weight_decay: 1e-05 
+momentum: 0.1 
+is_filter: 1 
+is_detrend: 0 
+is_normalize: 1 
+is_phase_harmonic: 1 
+is_tmpl_trueseen: 1 
+save_path: ./Outputs/checkpoints/intra_subj0_20250326-173133/best-mdl.pth 
+timenow: 20250326-173133 
+server: default 
+subject_condition: intra 
+random_seed: 202403 
+nfolds: 0 
+device: cuda 
+load_path: ./Outputs/checkpoints/intra_subj0_20250326-173133/best-mdl.pth/best-mdl 
+subjects_pretrain: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69] 
+class_num: 40 
+block_num: 4 
+chnl_num: 9 
+timepoint_num: 200 
+input_shape: (1, 9, 200) 
+sampling_rate: 250.0 
+frequencies: [ 8.6  8.8  9.   9.2  9.4  9.6  9.8 10.  10.2 10.4 10.6 10.8 11.  11.2
+ 11.4 11.6 11.8 12.  12.2 12.4 12.6 12.8 13.  13.2 13.4 13.6 13.8 14.
+ 14.2 14.4 14.6 14.8 15.  15.2 15.4 15.6 15.8  8.   8.2  8.4] 
+phases: [4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265] 
+harmonic_x2: 10 
+labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+blocks: [0, 1, 2, 3] 
+label_unseen: [39, 4, 9, 14, 19, 24, 29, 34] 
+label_valid: [38, 3, 8, 13, 20, 25, 30, 35] 
+label_seen: [37, 2, 7, 12, 17, 22, 27, 32, 38, 3, 8, 13, 18, 23, 28, 33, 0, 5, 10, 15, 20, 25, 30, 35, 1, 6, 11, 16, 21, 26, 31, 36] 
+label_train: [37, 2, 7, 12, 17, 22, 27, 32, 18, 23, 28, 33, 0, 5, 10, 15, 1, 6, 11, 16, 21, 26, 31, 36] 
+seen_num: 32 
+
+
+dataset: beta 
+subjects: 70 
+unseen_num: 8 
+window: 0.6 
+subject: 0 
+spatialfilter: trca 
+model: trca 
+step: 25 
+trad_trainblocks: 3 
+is_pretrain: 0 
+is_plot_template: 1 
+is_losscurve: 1 
+is_plot_weights: 0 
+is_csv_output: 1 
+is_cudnn_fixed: 1 
+is_tsne_data: 0 
+fb_num: 5 
+harmonic_num: 5 
+lr: 0.001 
+batch_size: 64 
+epoch_num: 200 
+lr_pretrain: 0.001 
+batch_size_pretrain: 64 
+epoch_num_pretrain: 50 
+dropout: 0.5 
+loss: mse 
+is_earlystopping: 1 
+es_patience: 100 
+opt: adam 
+weight_decay: 1e-05 
+momentum: 0.1 
+is_filter: 1 
+is_detrend: 0 
+is_normalize: 1 
+is_phase_harmonic: 1 
+is_tmpl_trueseen: 1 
+save_path: ./Outputs/checkpoints/intra_subj0_20250326-173133/best-mdl.pth 
+timenow: 20250326-173133 
+server: default 
+subject_condition: intra 
+random_seed: 202403 
+nfolds: 0 
+device: cuda 
+load_path: ./Outputs/checkpoints/intra_subj0_20250326-173133/best-mdl.pth/best-mdl 
+subjects_pretrain: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69] 
+class_num: 40 
+block_num: 4 
+chnl_num: 9 
+timepoint_num: 150 
+input_shape: (1, 9, 150) 
+sampling_rate: 250.0 
+frequencies: [ 8.6  8.8  9.   9.2  9.4  9.6  9.8 10.  10.2 10.4 10.6 10.8 11.  11.2
+ 11.4 11.6 11.8 12.  12.2 12.4 12.6 12.8 13.  13.2 13.4 13.6 13.8 14.
+ 14.2 14.4 14.6 14.8 15.  15.2 15.4 15.6 15.8  8.   8.2  8.4] 
+phases: [4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265] 
+harmonic_x2: 10 
+labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+blocks: [0, 1, 2, 3] 
+label_unseen: [39, 4, 9, 14, 19, 24, 29, 34] 
+label_valid: [38, 3, 8, 13, 20, 25, 30, 35] 
+label_seen: [37, 2, 7, 12, 17, 22, 27, 32, 38, 3, 8, 13, 18, 23, 28, 33, 0, 5, 10, 15, 20, 25, 30, 35, 1, 6, 11, 16, 21, 26, 31, 36] 
+label_train: [37, 2, 7, 12, 17, 22, 27, 32, 18, 23, 28, 33, 0, 5, 10, 15, 1, 6, 11, 16, 21, 26, 31, 36] 
+seen_num: 32 
+
+
+dataset: beta 
+subjects: 70 
+unseen_num: 8 
+window: 0.4 
+subject: 0 
+spatialfilter: trca 
+model: trca 
+step: 25 
+trad_trainblocks: 3 
+is_pretrain: 0 
+is_plot_template: 1 
+is_losscurve: 1 
+is_plot_weights: 0 
+is_csv_output: 1 
+is_cudnn_fixed: 1 
+is_tsne_data: 0 
+fb_num: 5 
+harmonic_num: 5 
+lr: 0.001 
+batch_size: 64 
+epoch_num: 200 
+lr_pretrain: 0.001 
+batch_size_pretrain: 64 
+epoch_num_pretrain: 50 
+dropout: 0.5 
+loss: mse 
+is_earlystopping: 1 
+es_patience: 100 
+opt: adam 
+weight_decay: 1e-05 
+momentum: 0.1 
+is_filter: 1 
+is_detrend: 0 
+is_normalize: 1 
+is_phase_harmonic: 1 
+is_tmpl_trueseen: 1 
+save_path: ./Outputs/checkpoints/intra_subj0_20250326-173133/best-mdl.pth 
+timenow: 20250326-173133 
+server: default 
+subject_condition: intra 
+random_seed: 202403 
+nfolds: 0 
+device: cuda 
+load_path: ./Outputs/checkpoints/intra_subj0_20250326-173133/best-mdl.pth/best-mdl 
+subjects_pretrain: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69] 
+class_num: 40 
+block_num: 4 
+chnl_num: 9 
+timepoint_num: 100 
+input_shape: (1, 9, 100) 
+sampling_rate: 250.0 
+frequencies: [ 8.6  8.8  9.   9.2  9.4  9.6  9.8 10.  10.2 10.4 10.6 10.8 11.  11.2
+ 11.4 11.6 11.8 12.  12.2 12.4 12.6 12.8 13.  13.2 13.4 13.6 13.8 14.
+ 14.2 14.4 14.6 14.8 15.  15.2 15.4 15.6 15.8  8.   8.2  8.4] 
+phases: [4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265] 
+harmonic_x2: 10 
+labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+blocks: [0, 1, 2, 3] 
+label_unseen: [39, 4, 9, 14, 19, 24, 29, 34] 
+label_valid: [38, 3, 8, 13, 20, 25, 30, 35] 
+label_seen: [37, 2, 7, 12, 17, 22, 27, 32, 38, 3, 8, 13, 18, 23, 28, 33, 0, 5, 10, 15, 20, 25, 30, 35, 1, 6, 11, 16, 21, 26, 31, 36] 
+label_train: [37, 2, 7, 12, 17, 22, 27, 32, 18, 23, 28, 33, 0, 5, 10, 15, 1, 6, 11, 16, 21, 26, 31, 36] 
+seen_num: 32 
+
+
+dataset: beta 
+subjects: 70 
+unseen_num: 8 
+window: 1.2 
+subject: 0 
+spatialfilter: trca 
+model: trca 
+step: 25 
+trad_trainblocks: 3 
+is_pretrain: 0 
+is_plot_template: 1 
+is_losscurve: 1 
+is_plot_weights: 0 
+is_csv_output: 1 
+is_cudnn_fixed: 1 
+is_tsne_data: 0 
+fb_num: 5 
+harmonic_num: 5 
+lr: 0.001 
+batch_size: 64 
+epoch_num: 200 
+lr_pretrain: 0.001 
+batch_size_pretrain: 64 
+epoch_num_pretrain: 50 
+dropout: 0.5 
+loss: mse 
+is_earlystopping: 1 
+es_patience: 100 
+opt: adam 
+weight_decay: 1e-05 
+momentum: 0.1 
+is_filter: 1 
+is_detrend: 0 
+is_normalize: 1 
+is_phase_harmonic: 1 
+is_tmpl_trueseen: 1 
+save_path: ./Outputs/checkpoints/intra_subj0_20250326-173133/best-mdl.pth 
+timenow: 20250326-173133 
+server: default 
+subject_condition: intra 
+random_seed: 202403 
+nfolds: 0 
+device: cuda 
+load_path: ./Outputs/checkpoints/intra_subj0_20250326-173133/best-mdl.pth/best-mdl 
+subjects_pretrain: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69] 
+class_num: 40 
+block_num: 4 
+chnl_num: 9 
+timepoint_num: 300 
+input_shape: (1, 9, 300) 
+sampling_rate: 250.0 
+frequencies: [ 8.6  8.8  9.   9.2  9.4  9.6  9.8 10.  10.2 10.4 10.6 10.8 11.  11.2
+ 11.4 11.6 11.8 12.  12.2 12.4 12.6 12.8 13.  13.2 13.4 13.6 13.8 14.
+ 14.2 14.4 14.6 14.8 15.  15.2 15.4 15.6 15.8  8.   8.2  8.4] 
+phases: [4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265 4.71238898 0.
+ 1.57079633 3.14159265 4.71238898 0.         1.57079633 3.14159265
+ 4.71238898 0.         1.57079633 3.14159265] 
+harmonic_x2: 10 
+labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39] 
+blocks: [0, 1, 2, 3] 
+label_unseen: [39, 4, 9, 14, 19, 24, 29, 34] 
+label_valid: [38, 3, 8, 13, 20, 25, 30, 35] 
+label_seen: [37, 2, 7, 12, 17, 22, 27, 32, 38, 3, 8, 13, 18, 23, 28, 33, 0, 5, 10, 15, 20, 25, 30, 35, 1, 6, 11, 16, 21, 26, 31, 36] 
+label_train: [37, 2, 7, 12, 17, 22, 27, 32, 18, 23, 28, 33, 0, 5, 10, 15, 1, 6, 11, 16, 21, 26, 31, 36] 
+seen_num: 32 
+
+

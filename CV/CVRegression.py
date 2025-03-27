@@ -3,7 +3,7 @@ import pickle
 from torch.utils.data import DataLoader, TensorDataset
 
 from CV.CrossValidation import *
-from plots import *
+# from plots import *
 
 class CVRegression(CrossValidation):
     """
@@ -97,7 +97,8 @@ class CVRegression(CrossValidation):
         # file = open(self.args.fn_detail, 'wb')
         # pickle.dump(data, file)
         # file.close()
-        update_template_in_detail(self.args, seenset, unseenset, ssvep_templates_regress, fbii)
+        if self.args.model == 'srrnet':
+            update_template_in_detail(self.args, seenset, unseenset, ssvep_templates_regress, fbii)
 
 
 

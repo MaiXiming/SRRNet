@@ -14,15 +14,18 @@ sys.path.append("..")
 import scipy.io
 import h5py
 
+path_file_current = os.path.abspath(__file__)
+path_folder_current = os.path.dirname(path_file_current)
+
 ## Input
-method_folder = 'igzsl' # reg igzsl sst tlcca fbcca
+method_folder = 'trca' # reg igzsl sst tlcca fbcca trca
 
 ## Fixed Params
 subjs = {'benchmark': 35, 'beta': 70}
 datasets = ['benchmark', 'beta']
 unseens = [8, 20, 32]
 times = [0.4, 0.6, 0.8, 1.0, 1.2]
-results_path = 'Analysis/Acc/Statistics_raw/'
+results_path = os.path.join(path_folder_current, '../data/accs_raw/') #'Analysis/Acc/Statistics_raw/'
 
 method = 'rescnn_lstm' if method_folder == 'reg' else method_folder
 suffix = '.mat' if method in ['sst', 'tlcca', 'fbcca'] else '.csv' # .csv .mat
@@ -48,7 +51,8 @@ def main():
     ## Save accs into .pickle
     dict_pkl = {'results':results, 'datasets':datasets, 
                 'unseens': unseens, 'times': times}
-    with open('Analysis/Acc/acc-pkls/'+method_folder+'.pkl', 'wb') as pickle_file: # from base
+    # with open('Analysis/Acc/acc-pkls/'+method_folder+'.pkl', 'wb') as pickle_file: # from base
+    with open(os.path.join(path_folder_current,'acc-pkls/'+method_folder+'.pkl'), 'wb') as pickle_file: # from base
         pickle.dump(dict_pkl, pickle_file)
     
                 

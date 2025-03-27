@@ -3,11 +3,15 @@ import matplotlib.pyplot as plt
 import matplotlib
 # matplotlib.use('WebAgg')
 import pickle
+import os
+
+path_file_current = os.path.abspath(__file__)
+path_folder_current = os.path.dirname(path_file_current)
 
 ## Figure settings
-colors = [[0,0,0], [191,29,45], [1,138,103], [24, 104, 178], [243, 163, 50]]
-markers = ['.', 'o', 's', '^', 'v'] # ['o', 'v', '^', '<', '>', '1', '2', '3']
-methods = ['reg', 'igzsl', 'sst', 'tlcca', 'fbcca']
+colors = [[0,0,0], [191,29,45], [1,138,103], [24, 104, 178], [243, 163, 50], [200, 200, 200]]
+markers = ['.', 'o', 's', '^', 'v', '>', ] # ['o', 'v', '^', '<', '>', '1', '2', '3']
+methods = ['reg', 'igzsl', 'sst', 'tlcca', 'fbcca', 'trca']
 proposed = 'reg'
 
 ## Condition setting
@@ -49,8 +53,10 @@ def main(dataset='benchmark', unseen=8):
     ax.spines['right'].set_visible(False)  # 隐藏右侧边框
     plt.show()
     # ensure_path('figs')
-    plt.savefig('Analysis/Acc/figs/' + dataset+'-u' + str(unseen) + '_'+condition+'.svg')
-    plt.savefig('Analysis/Acc/figs/' + dataset+'-u' + str(unseen) + '_'+condition+'.png')
+    # plt.savefig('Analysis/Acc/figs/' + dataset+'-u' + str(unseen) + '_'+condition+'.svg')
+    # plt.savefig('Analysis/Acc/figs/' + dataset+'-u' + str(unseen) + '_'+condition+'.png')
+    plt.savefig(os.path.join(path_folder_current, 'figs/' + dataset+'-u' + str(unseen) + '_'+condition+'.svg'))
+    plt.savefig(os.path.join(path_folder_current, 'figs/' + dataset+'-u' + str(unseen) + '_'+condition+'.png'))
 
 
     condition = 'ITR'
@@ -79,8 +85,10 @@ def main(dataset='benchmark', unseen=8):
     ax.spines['right'].set_visible(False)  # 隐藏右侧边框
     plt.show()
     # ensure_path('figs')
-    plt.savefig('Analysis/Acc/figs/' + dataset+'-u' + str(unseen) + '_'+condition+'.svg')
-    plt.savefig('Analysis/Acc/figs/' + dataset+'-u' + str(unseen) + '_'+condition+'.png')
+    # plt.savefig('Analysis/Acc/figs/' + dataset+'-u' + str(unseen) + '_'+condition+'.svg')
+    # plt.savefig('Analysis/Acc/figs/' + dataset+'-u' + str(unseen) + '_'+condition+'.png')
+    plt.savefig(os.path.join(path_folder_current, 'figs/' + dataset+'-u' + str(unseen) + '_'+condition+'.svg'))
+    plt.savefig(os.path.join(path_folder_current, 'figs/' + dataset+'-u' + str(unseen) + '_'+condition+'.png'))
 
 
 
@@ -122,7 +130,8 @@ def main(dataset='benchmark', unseen=8):
 
 def get_results_pkl(method, dataset, unseen):
     # pth = 'acc-pkls/'+method+'.pkl'
-    pth = 'Analysis/Acc/acc-pkls/'+method+'.pkl'
+    # pth = 'Analysis/Acc/acc-pkls/'+method+'.pkl'
+    pth = os.path.join(path_folder_current, 'acc-pkls/'+method+'.pkl')
     with open(pth, 'rb') as pickle_file:
         data = pickle.load(pickle_file)
     times = data['times']

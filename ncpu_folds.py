@@ -5,17 +5,18 @@ import sys
 import os
 import time
 from datetime import datetime
+from utils import *
 """
 Improve: using cpu_num < subjects + lock cpu by .lock. 
 """
 
 dataset = 'beta'
 # wind_sec = 0.6
-windows = [1.0, 0.8, 0.6, ] # 
+windows = [1.0, 0.8, 0.6, 0.4, 1.2] # 
 fb_num = 5
-model = 'tdca'
+model = 'trca'
 # trad_trainblocks = 4
-trainblocks = [2,3,] # 4,5,
+trainblocks = [3, ] # 4,5,
 # unseen_num = 20
 # is_tmpl_trueseen = 1
 
@@ -24,6 +25,8 @@ subjects = datasets[dataset]
 
 timenow = datetime.now()
 timenow_str = timenow.strftime("%Y%m%d-%H%M%S")
+
+ensure_path('Tmp/logs/')
 
 
 # def run_program(fold, cpu_affinity):
@@ -35,7 +38,7 @@ def run_program(fold, cpu_affinity, Nb, win):
 
         is_first_fold = 1 if fold == 0 else 0
 
-        cmd = f"python onefold.py " + \
+        cmd = f"python main_fold1.py " + \
         f"--dataset {dataset} " + \
         f"--subjects {subjects} " + \
         f"--trad-trainblocks {Nb} " + \

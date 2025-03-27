@@ -47,7 +47,8 @@ def main():
     # pickle.dump(data, file)
     # file.close()
     # args.fn_detail = fn_detail
-    args = create_file_detail(args)
+    if args.model == 'srrnet':
+        args = create_file_detail(args)
 
     
 
@@ -91,14 +92,15 @@ def main():
 
 
     ## Records details
-    with open(args.fn_detail, 'rb') as file:
-        data = pickle.load(file)
-    data['acc'] = acc_mean
-    data['confusemat'] = confusemat
+    if args.model == 'srrnet':
+        with open(args.fn_detail, 'rb') as file:
+            data = pickle.load(file)
+        data['acc'] = acc_mean
+        data['confusemat'] = confusemat
 
-    file = open(args.fn_detail, 'wb')
-    pickle.dump(data, file)
-    file.close()
+        file = open(args.fn_detail, 'wb')
+        pickle.dump(data, file)
+        file.close()
 
 
 def set_args():
