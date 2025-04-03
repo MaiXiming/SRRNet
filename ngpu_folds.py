@@ -24,9 +24,9 @@ MEAN_STATUS_TIME = 5 # 5; 45-pretrain
 TIMER = np.zeros(8) # timer for each gpu
 
 ## Params
-datasets = ['benchmark', 'beta', ] # 
+datasets = ['beta', 'benchmark', ] # 
 unseens = [32, 8, 20, ] # 20, 
-windows = [1, ] # 0.4, 0.6, 0.8, 
+windows = [0.4, 0.6, 0.8, 1.0, 1.2, ] # 0.4, 0.6, 0.8, 1.0, 1.2, 
 step = 25 ## (0,1): second; [1,100]: win%
 epoch_num = 200
 batch_size = 64 # 32-gzsl; 64-Reg
@@ -35,7 +35,7 @@ is_losscurve = 0
 
 loss = 'mse' # corr mse
 
-models = ['srrnet'] # srrnet, igzsl
+models = ['srrnet'] # srrnet, igzsl, srrv2
 fb_num = 5 # 5; gzsl-1; 
 spatialfilter = 'trca' # none trca tdca ecca
 
@@ -87,7 +87,7 @@ def main():
                         f"--is-earlystopping {is_earlystop} " + \
                         f"--es-patience {100} " + \
                         f"--is-normalize {1} " + \
-                        f"--is-phase-harmonic {0} " + \
+                        f"--is-phase-harmonic {1} " + \
                         f"--is-tmpl-trueseen {is_tmpl_trueseen} " + \
                         f"--is-plot-template {0} " + \
                         f"--is-plot-weights {0} " + \

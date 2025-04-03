@@ -5,6 +5,7 @@ from torch.utils.data import DataLoader, TensorDataset
 from CV.CrossValidation import *
 from utils import *
 # from plots import *
+import time
 
 class CVRegression(CrossValidation):
     """
@@ -80,7 +81,25 @@ class CVRegression(CrossValidation):
 
         
         
-        templates_filtered, weights_sf_seen, best_dict = self.get_spatialfilter_templates(reg_trainset, reg_validset, sc_template)
+        templates_filtered, weights_sf_seen, best_dict, templates_pure = self.get_spatialfilter_templates(reg_trainset, reg_validset, sc_template)
+        
+        # ## start: replace `get_spatialfilter_templates` for computation time record
+        # ## Spatial filters
+        # data_seen = np.concatenate((reg_trainset['data'][:,0,:,:,:], reg_validset['data'][:,0,:,:,:]), axis=1) # along class dim --> (block,class,chnl,tp)
+        # weights_sf_seen = self.calculate_spatialfilters(data_seen, model=self.args.spatialfilter)
+
+        # ## Regress templates using DL model
+        # model, best_dict = self.get_regress_model(reg_trainset, reg_validset, weights_sf_seen, pretrainset=None)
+        # # corr_unseen, loss_unseen = 0, 0 ## evaluate_model_on_unseen(model, unseenset, self.args, loss='mseloss')
+        
+        
+        # templates_filtered, ssvep_templates_regress_filtered = self.regress_filter_templates(reg_trainset, reg_validset, model, sc_template[0,:,:,:], weights_sf_seen) # cls subspace tp
+        # start = time.time()
+        # ## end
+
+        ## bug: how to feed unseenset?
+        if self.args.model == 'srrnet':
+            update_template_in_detail(self.args, seenset, unseenset, templates_pure, fbii)
 
         # ## Regress templates using DL model
         # model, best_dict = self.get_regress_model(reg_trainset, reg_validset, pretrainset=None)
@@ -98,6 +117,8 @@ class CVRegression(CrossValidation):
         ## Predict
         data_test = np.squeeze(testblocks['data']) # class chnl tp
         predicts, rhos = self.decode_testdata(data_test, templates_filtered, weights_sf_seen)
+        # end = time.time()
+        # print(f"computation time: {(end-start)/data_test.shape[0]*5:.6f}s (have *5 since FB)") 
         
         acc = np.mean(predicts==np.array(testblocks['label']))
         print(f'Subject={self.args.subject}, block_test={block_test}, fbii={fbii}, Acc={acc:.4f}')
@@ -134,15 +155,12 @@ class CVRegression(CrossValidation):
         model, best_dict = self.get_regress_model(reg_trainset, reg_validset, weights_sf_seen, pretrainset=None)
         # corr_unseen, loss_unseen = 0, 0 ## evaluate_model_on_unseen(model, unseenset, self.args, loss='mseloss')
         
-        ssvep_templates_combine_filtered, ssvep_templates_regress_filtered = self.regress_filter_templates(reg_trainset, reg_validset, model, sc_template[0,:,:,:], weights_sf_seen) # cls subspace tp
+        ssvep_templates_combine_filtered, ssvep_templates_regress_filtered, ssvep_templates_pure = self.regress_filter_templates(reg_trainset, reg_validset, model, sc_template[0,:,:,:], weights_sf_seen) # cls subspace tp
 
-        ## bug: how to feed unseenset?
-        # if self.args.model == 'srrnet':
-        #     update_template_in_detail(self.args, seenset, unseenset, ssvep_templates_regress, fbii)
 
         # ssvep_templates_filtered = np.matmul(weights_sf_seen, ssvep_templates_combine)
 
-        return ssvep_templates_combine_filtered, weights_sf_seen, best_dict
+        return ssvep_templates_combine_filtered, weights_sf_seen, best_dict, ssvep_templates_pure
     
     
     def decode_testdata(self, data_test, ssvep_templates, weights_sf_seen):
@@ -219,23 +237,26 @@ class CVRegression(CrossValidation):
 
     def regress_filter_templates(self, trainset, validset, model, sc_template_s0, weights_sf_seen):
         ## Regress ssvep template for unseen classes using model&sc_template, mean() ssvep template for seen classes using trainset&validset
+        ## template_regress: signal if srrnet else None
         template_regress = self.regress_ssvep_template(model, sc_template_s0)
 
         if self.args.model == 'srrnet': # srrv2: regressed output filtered already
-            template_regress = np.matmul(weights_sf_seen, template_regress)
+            template_regress_filtered = np.matmul(weights_sf_seen, template_regress)
+        else:
+            template_regress = None
 
         ## shape: subspace_num, timepoint_num
 
         ## Integrate mean & regressed templates into final ssvep templates
-        ssvep_templates_output = np.zeros_like(template_regress)
-        ssvep_templates_output[:] = template_regress[:]
+        ssvep_templates_combined_filtered = np.zeros_like(template_regress_filtered)
+        ssvep_templates_combined_filtered[:] = template_regress_filtered[:]
 
         if self.args.is_tmpl_trueseen == 1:
             ## Don't use data_seen since order is wrong, ok for spatial filtering, not ok for templates
-            ssvep_templates_output[self.args.label_train,:,:] = np.matmul(weights_sf_seen, np.mean(trainset['data'][:,0,:,:,:], axis=0))
-            ssvep_templates_output[self.args.label_valid,:,:] = np.matmul(weights_sf_seen, np.mean(validset['data'][:,0,:,:,:], axis=0))
+            ssvep_templates_combined_filtered[self.args.label_train,:,:] = np.matmul(weights_sf_seen, np.mean(trainset['data'][:,0,:,:,:], axis=0))
+            ssvep_templates_combined_filtered[self.args.label_valid,:,:] = np.matmul(weights_sf_seen, np.mean(validset['data'][:,0,:,:,:], axis=0))
             
-        return ssvep_templates_output, template_regress
+        return ssvep_templates_combined_filtered, template_regress_filtered, template_regress
 
 
     def regress_ssvep_template(self, model, sc_template_s0):

@@ -148,7 +148,7 @@ def set_args():
     ## Params (fixed usually)
     parser.add_argument('--is-filter', type=int, default=1) 
     parser.add_argument('--is-detrend', type=int, default=0) 
-    parser.add_argument('--is-normalize', type=int, default=1)
+    parser.add_argument('--is-normalize', type=int, default=0)
     parser.add_argument('--is-phase-harmonic', type=int, default=1)
     parser.add_argument('--is-tmpl-trueseen', type=int, default=1) # seen tmpl: 1==true; 0==regressed
     parser.add_argument('--save-path', type=str, default='./Outputs/checkpoints')
@@ -236,6 +236,12 @@ def set_crossvalidation(args):
     elif args.model in ['trca', 'tdca']:
         cv = CrossValidation(args)
     else:
+        assert args.harmonic_num == 5
+        assert args.is_cudnn_fixed == 1
+        assert args.is_normalize == 1
+        assert args.is_phase_harmonic == 1
+        assert args.is_tmpl_trueseen == 1
+
         cv = CVRegression(args)
     return cv
 

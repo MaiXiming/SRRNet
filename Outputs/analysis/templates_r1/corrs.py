@@ -61,7 +61,7 @@ def compute_acc_su(confusemat, labels, block_num):
         count += confusemat[idx, idx]
     return count / total
 
-def get_data(dataset, unseen, window, subject, folder=os.path.join(path_folder_current, '../data/details-norm0')):
+def get_data(dataset, unseen, window, subject, folder='../data/details-norm0'):
     """
     Returns: 
         data['recon_templates'][bii, ui, fbii, channel_idx, :]
@@ -73,12 +73,13 @@ def get_data(dataset, unseen, window, subject, folder=os.path.join(path_folder_c
     filename = f"{dataset}-u{unseen}-t{window:.1f}-s{subject}.pickle"
     # filename = f"Details/{dataset}-u{unseen}-t{window:.1f}-s{subject}.pickle"
     # filename = f"Details-unseen/{dataset}-u{unseen}-t{window:.1f}-s{subject}.pickle"
+    folder = os.path.join(path_folder_current, folder)
     filename = os.path.join(folder, filename)
     with open(filename, 'rb') as file:
         data = pickle.load(file)
     return data
 
-def get_results(dataset, unseen, window, channel_idx=-2, fbii=0, mean_condition='unseen', metric='corr'):
+def get_results(dataset, unseen, window, channel_idx=-2, fbii=0, mean_condition='unseen', metric='corr', path_folder='../data/details-norm0'):
     """
     Inputs:
         mean_condition: all == mean all classes; unseen == mean only on unseen classes (args.label_unseen)
@@ -95,7 +96,7 @@ def get_results(dataset, unseen, window, channel_idx=-2, fbii=0, mean_condition=
 
     for subject in range(subjects):
         ## Load data
-        data = get_data(dataset, unseen, window, subject)
+        data = get_data(dataset, unseen, window, subject, path_folder)
         # filename = f"Details/{dataset}-u{unseen}-t{window:.1f}-s{subject}.pickle"
         # # filename = f"Details-unseen/{dataset}-u{unseen}-t{window:.1f}-s{subject}.pickle"
         # filename = os.path.join(path_folder_current, filename)
@@ -118,7 +119,7 @@ def get_results(dataset, unseen, window, channel_idx=-2, fbii=0, mean_condition=
                 # true_t = data['true_templates'][idx, fbii, channel_idx, :]
 
                 if metric == 'corr':
-                    corr = compute_corrcoef(recon_t, true_t)
+                    corr = compute_corrcoef(recon_t, true_t) # bug: invalid value encountered in divide (subject 31)
                 else:
                     corr = compute_mse(recon_t, true_t)
 

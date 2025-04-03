@@ -1,3 +1,4 @@
-- details-norm0: pickle files recording SSVEP templates, with --is-normalize 0
+- details-norm0: pickle files recording SSVEP templates, with --is-normalize 0 bcz true templates plotting needs to the same (normalize on whole trainset, different unseen condition has diff mean/std -> diff true template)
+- details-norm1: everything but plotting 
 - harmonic_visualize: un-comment visualization code in CVRegression.
 - accs_raw: from Outputs/Results/CSV, using .csv to save results. note that fbcca/trca same results across conditions, so rename manually.

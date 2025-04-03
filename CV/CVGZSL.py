@@ -1,6 +1,8 @@
 from CV.CrossValidation import *
-
 from torch.utils.data import *
+from utils import *
+
+import time
 
 """
 Unmentioned details in iGZSL paper: reason for choosing
@@ -155,6 +157,7 @@ class CVGZSL(CrossValidation):
         template_sine_p0 = torch.from_numpy(tmpl_sine[0,:,:,:].astype('float32')).float().to(self.args.device)
         template_sine_p0 = torch.unsqueeze(template_sine_p0, 0) # (1, 2Nh, Nf, Ns)
 
+        start = time.time()
         sample_num = data_test.shape[0]
         preds = []
         # preds_agg, preds_xfm, preds_ext, preds_cls = [],[],[],[]
@@ -175,6 +178,9 @@ class CVGZSL(CrossValidation):
             pred = self.predict_final_igzsl(X1, out_cnet, X2, S, beta, c_opt_idx, is_cond=True)
 
             preds.append(pred)
+
+        end = time.time()
+        print('Computation time=', (end-start)/sample_num)
         acc = np.mean(preds==np.array(testblocks['label']))
         print(f'Subject={self.args.subject}, block_test={block_test}, Acc={acc}')
 

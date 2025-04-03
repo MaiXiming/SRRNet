@@ -18,7 +18,7 @@ path_file_current = os.path.abspath(__file__)
 path_folder_current = os.path.dirname(path_file_current)
 
 ## Input
-method_folder = 'trca' # reg igzsl sst tlcca fbcca trca
+method_folder = 'srrnet' # reg igzsl sst tlcca fbcca trca srrv2 srrnet
 
 ## Fixed Params
 subjs = {'benchmark': 35, 'beta': 70}
@@ -29,7 +29,11 @@ results_path = os.path.join(path_folder_current, '../data/accs_raw/') #'Analysis
 
 method = 'rescnn_lstm' if method_folder == 'reg' else method_folder
 suffix = '.mat' if method in ['sst', 'tlcca', 'fbcca'] else '.csv' # .csv .mat
-prep = '-trca' if method_folder == 'reg' else '' # reg: -trca -tdca -none; others: blank '' note: '-' is necessary
+if method_folder == 'reg' or method_folder == 'srrv2' or method_folder == 'srrnet':
+    prep = '-trca' # -trca -tdca -none
+else:
+    prep = ''
+# note: '-' is necessary
 
 
 def main():

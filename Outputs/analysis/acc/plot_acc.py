@@ -9,10 +9,10 @@ path_file_current = os.path.abspath(__file__)
 path_folder_current = os.path.dirname(path_file_current)
 
 ## Figure settings
-colors = [[0,0,0], [191,29,45], [1,138,103], [24, 104, 178], [243, 163, 50], [200, 200, 200]]
-markers = ['.', 'o', 's', '^', 'v', '>', ] # ['o', 'v', '^', '<', '>', '1', '2', '3']
-methods = ['reg', 'igzsl', 'sst', 'tlcca', 'fbcca', 'trca']
-proposed = 'reg'
+colors = [[0,0,0], [0,0,0], [191,29,45], [1,138,103], [24, 104, 178], [243, 163, 50], [200, 200, 200]]
+markers = ['.', '.', 'o', 's', '^', 'v', '>', ] # ['o', 'v', '^', '<', '>', '1', '2', '3']
+methods = ['srrv2', 'srrnet', 'igzsl', 'sst', 'tlcca', 'fbcca', 'trca']
+proposed = 'srrnet'
 
 ## Condition setting
 # unseen2Nbs = {
@@ -28,6 +28,9 @@ class_num = 40
 
 def main(dataset='benchmark', unseen=8):
 
+    lw = 5
+    lw_grid = 0.1
+
     condition = 'Acc'
     plt.figure(figsize=(5,5))
     for mii in range(len(methods)):
@@ -37,20 +40,31 @@ def main(dataset='benchmark', unseen=8):
 
         color = np.array(colors[mii]) / 255
         marker = markers[mii]
-        line = '-'
+        line = '--' if method=='srrv2' else '-'
         label = method+'(proposed)' if method==proposed else method
 
         plt.errorbar(times, mmean, yerr=ssem, marker=marker, linestyle=line, color=color, label=label)
         # plt.legend(loc='lower right')
         # plt.xlabel('Time (s)')
         # plt.ylabel(condition)
-        plt.ylim([0,1])
+        plt.ylim([0,1.05])
         plt.xlim([0.3, 1.3])
         plt.xticks([0.4,0.6,0.8,1.0,1.2], labels=[])
-        plt.yticks([0.25, 0.5, 0.75], labels=[])
+        # plt.yticks([0.25, 0.5, 0.75], labels=[])
+        plt.yticks(np.linspace(0, 1, 11), labels=[])
+        print(dataset, unseen, 'Acc', method, mmean)
+        print(dataset, unseen, 'Acc (sem)', method, ssem)
     ax = plt.gca()  # 获取当前轴
     ax.spines['top'].set_visible(False)    # 隐藏顶部边框
     ax.spines['right'].set_visible(False)  # 隐藏右侧边框
+    
+    plt.grid(
+    True,           # 开启网格
+    axis='both',    # 对哪条坐标轴显示网格
+    which='major',  # 显示主刻度网格
+    linestyle='-', # 网格线型
+    linewidth=lw_grid   # 网格线宽
+    )
     plt.show()
     # ensure_path('figs')
     # plt.savefig('Analysis/Acc/figs/' + dataset+'-u' + str(unseen) + '_'+condition+'.svg')
@@ -68,21 +82,30 @@ def main(dataset='benchmark', unseen=8):
 
         color = np.array(colors[mii]) / 255
         marker = markers[mii]
-        line = '-'
+        line = '--' if method=='srrv2' else '-'
         label = method+'(proposed)' if method==proposed else method
 
         plt.errorbar(times, mmean, yerr=ssem, marker=marker, linestyle=line, color=color, label=label)
         # plt.xlabel('Time (s)')
         # plt.ylabel(condition)
         # plt.legend(loc='lower right')
-        plt.ylim([0,250])
+        plt.ylim([0,230])
         plt.xlim([0.3, 1.3])
         plt.xticks([0.4,0.6,0.8,1.0,1.2], labels=[])
-        plt.yticks([100, 200], labels=[])
+        # plt.yticks([100, 200], labels=[])
+        plt.yticks(np.linspace(0, 220, 12), labels=[])
         print(dataset, unseen, 'ITR', method, mmean)
+        print(dataset, unseen, 'ITR (sem)', method, ssem)
     ax = plt.gca()  # 获取当前轴
     ax.spines['top'].set_visible(False)    # 隐藏顶部边框
     ax.spines['right'].set_visible(False)  # 隐藏右侧边框
+    plt.grid(
+    True,           # 开启网格
+    axis='both',    # 对哪条坐标轴显示网格
+    which='major',  # 显示主刻度网格
+    linestyle='-', # 网格线型
+    linewidth=lw_grid   # 网格线宽
+    )
     plt.show()
     # ensure_path('figs')
     # plt.savefig('Analysis/Acc/figs/' + dataset+'-u' + str(unseen) + '_'+condition+'.svg')
