@@ -25,11 +25,11 @@ father_folder/
 │   └── ...
 └── data/
     ├── ssvep_benchmark_2016/
-        ├── data_sum/
-            ├── Freq_Phase.mat
-            ├── S1.mat
-            ├── S2.mat
-            └── ...
+    |   ├── data_sum/
+    |       ├── Freq_Phase.mat
+    |       ├── S1.mat
+    |       ├── S2.mat
+    |       └── ...
     └── ssvep_beta/
         ├── data/
             ├── S1.mat
