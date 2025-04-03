@@ -8,13 +8,6 @@ class SRRNet(nn.Module):
         super().__init__()
         assert N2h == 10
 
-        # self.cnn_expand = nn.Sequential(
-        #     Conv2dWithConstraint(1, ch_expand, kernel_size=(N2h, 1), padding='same'),
-        #     nn.BatchNorm2d(num_features=ch_expand),
-        #     nn.PReLU(),
-        #     nn.Dropout(dp),
-        # ) # (ch_expand, N2h, tp)
-
         self.cnn_expand = nn.Sequential(
             Conv2dWithConstraint(1, ch_expand, kernel_size=(1, 10), padding='same'),
             Conv2dWithConstraint(ch_expand, ch_expand, kernel_size=(N2h, 1), padding='same'),
